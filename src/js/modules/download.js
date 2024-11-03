@@ -1,9 +1,10 @@
-import html2pdf from "html2pdf.js";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-export const downloadDocumentByPdf = (documentEl, btn) => {
+export const downloadDocumentByPdf = (documentEl, btn, loading) => {
 	btn.addEventListener("click", () => {
+		loading.classList.add("loading--active");
+
 		html2canvas(documentEl, { scale: 6, useCORS: true }).then((canvas) => {
 			const imgData = canvas.toDataURL("image/png");
 
@@ -18,13 +19,16 @@ export const downloadDocumentByPdf = (documentEl, btn) => {
 			pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
 
 			// Сохраняем PDF
-			pdf.save("element.pdf");
+			pdf.save("diploma.pdf");
+
+			loading.classList.remove("loading--active");
 		});
 	});
 };
 
-export const downloadDocumentByPng = (documentEl, btn) => {
+export const downloadDocumentByPng = (documentEl, btn, loading) => {
 	btn.addEventListener("click", () => {
+		loading.classList.add("loading--active");
 		html2canvas(documentEl, { scale: 6 }).then((canvas) => {
 			// Создаем ссылку для скачивания
 			const link = document.createElement("a");
@@ -33,6 +37,8 @@ export const downloadDocumentByPng = (documentEl, btn) => {
 
 			// Автоматически кликаем на ссылку для скачивания изображения
 			link.click();
+
+			loading.classList.remove("loading--active");
 		});
 	});
 };

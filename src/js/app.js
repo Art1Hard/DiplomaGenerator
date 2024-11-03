@@ -9,7 +9,8 @@ const diplomaEl = document
 	.querySelector(".diploma__background");
 const downloadPDFBtn = document.getElementById("download-pdf");
 const downloadPNGBtn = document.getElementById("download-png");
+const loading = document.querySelector(".loading");
 
 isWebp();
-downloadDocumentByPdf(diplomaEl, downloadPDFBtn);
-downloadDocumentByPng(diplomaEl, downloadPNGBtn);
+downloadDocumentByPdf(diplomaEl, downloadPDFBtn, loading);
+downloadDocumentByPng(diplomaEl, downloadPNGBtn, loading);
