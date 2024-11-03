@@ -1,0 +1,70 @@
+.diploma {
+	display: flex;
+	justify-content: center;
+
+	&__background {
+		background-image: url("../../img/diplomas/diploma1.png");
+		background-repeat: no-repeat;
+		background-size: contain;
+		width: 500px;
+		min-width: 500px;
+		aspect-ratio: 39 / 55;
+	}
+
+	&__container {
+		padding: 45px 65px;
+		height: 100%;
+	}
+
+	&__title {
+		font-family: "Tenor Sans", sans-serif;
+		color: #0f7379;
+		font-size: 42px;
+		position: relative;
+		top: 14%;
+		left: 0;
+		text-align: center;
+	}
+
+	&__award {
+		font-family: "Tenor Sans", sans-serif;
+		color: #0f7379;
+		font-size: 30px;
+		position: relative;
+		top: 22%;
+		left: 0;
+		text-align: center;
+	}
+
+	&__fio {
+		font-family: "Tenor Sans", sans-serif;
+		color: #0f7379;
+		font-size: 18px;
+		position: relative;
+		top: 25%;
+		left: 0;
+		text-align: center;
+	}
+
+	&__content {
+		font-family: "Tenor Sans", sans-serif;
+		color: #0f7379;
+		font-size: 12px;
+		position: relative;
+		top: 34%;
+		left: 0;
+		text-align: center;
+	}
+}
+
+.diploma-absolute {
+	.diploma {
+		position: absolute;
+		top: -10000px;
+
+		&__background {
+			width: 500px;
+			min-width: 500px;
+		}
+	}
+}

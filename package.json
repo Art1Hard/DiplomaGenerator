@@ -50,5 +50,10 @@
 		"webp-converter": "2.2.3",
 		"webpack": "^5.91.0",
 		"webpack-stream": "^7.0.0"
+	},
+	"dependencies": {
+		"html2canvas": "^1.4.1",
+		"html2pdf.js": "^0.10.2",
+		"jspdf": "^2.5.2"
 	}
 }

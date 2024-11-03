@@ -1,6 +1,5 @@
-@forward "reset";
-@forward "fonts";
+@forward "./reset";
+@forward "./fonts";
+@forward "./main";
 
-body {
-	font-family: "Montserrat", sans-serif;
-}
+@forward "./elements/diploma";

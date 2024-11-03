@@ -3,7 +3,16 @@
 	@@include('html/head.html',{ "title":"Главная" })
 
 	<body>
+		<div id="diploma-el" class="diploma-absolute">
+			@@include('html/elements/diploma.html',{})
+		</div>
+
 		<h1>Hello world!</h1>
+
+		@@include('html/elements/diploma.html',{})
+
+		<button id="download-pdf">Скачать диплом в pdf</button>
+		<button id="download-png">Скачать диплом в png</button>
 	</body>
 
 	<script src="js/app.min.js"></script>
