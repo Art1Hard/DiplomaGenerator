@@ -50,6 +50,11 @@ class DiplomaGenerator {
 
 	downloadDocumentByPDF = (btn) => {
 		btn.addEventListener("click", () => {
+			if (this.#isEmptyFio()) {
+				alert("Заполните ФИО");
+				return;
+			}
+
 			if (this.#loader) this.#showLoader();
 
 			html2canvas(this.#fantomDocument, { scale: 6, useCORS: true }).then(
@@ -77,6 +82,11 @@ class DiplomaGenerator {
 
 	downloadDocumentByPNG = (btn) => {
 		btn.addEventListener("click", () => {
+			if (this.#isEmptyFio()) {
+				alert("Заполните ФИО");
+				return;
+			}
+
 			if (this.#loader) this.#showLoader();
 
 			html2canvas(this.#fantomDocument, { scale: 6 }).then((canvas) => {
@@ -91,6 +101,10 @@ class DiplomaGenerator {
 				if (this.#loader) this.#hideLoader();
 			});
 		});
+	};
+
+	#isEmptyFio = () => {
+		return this.#form.querySelector("#fio-input").value === "";
 	};
 
 	#showLoader = () => {
