@@ -3,20 +3,56 @@ import html2canvas from "html2canvas";
 
 class DiplomaGenerator {
 	#documentEl;
+	#fantomDocument;
 	#loader;
 	#form;
 
-	constructor(documentEl, form, loader) {
+	constructor(documentEl, fantomDocument, form, loader) {
 		this.#documentEl = documentEl;
+		this.#fantomDocument = fantomDocument;
 		this.#form = form;
 		this.#loader = loader;
 	}
+
+	initDiplomaGenerator = () => {
+		const fioEl = document.querySelectorAll(".diploma__fio");
+		const majorEl = document.querySelectorAll(".diploma__major");
+		const organizatorEl = document.querySelectorAll(
+			".diploma__organization-fio"
+		);
+		const dateEl = document.querySelectorAll(".diploma__data");
+
+		const formData = this.#form.querySelectorAll("input");
+
+		const diplomaData = [fioEl, majorEl, organizatorEl, dateEl];
+
+		for (let i = 0; i < formData.length; i++) {
+			formData[i].addEventListener("input", () => {
+				for (let j = 0; j < diplomaData[i].length; j++) {
+					diplomaData[i][j].textContent = formData[i].value;
+
+					if (formData[i].id === "date-input") {
+						// Если это поле даты
+						diplomaData[i][j].textContent = this.#getLocalDate(formData[i]);
+					}
+				}
+			});
+		}
+	};
+
+	#getLocalDate = (input) => {
+		return new Date(input.value).toLocaleDateString("ru-RU", {
+			day: "2-digit",
+			month: "long",
+			year: "numeric",
+		});
+	};
 
 	downloadDocumentByPDF = (btn) => {
 		btn.addEventListener("click", () => {
 			if (this.#loader) this.#showLoader();
 
-			html2canvas(this.#documentEl, { scale: 6, useCORS: true }).then(
+			html2canvas(this.#fantomDocument, { scale: 6, useCORS: true }).then(
 				(canvas) => {
 					const imgData = canvas.toDataURL("image/png");
 
@@ -43,7 +79,7 @@ class DiplomaGenerator {
 		btn.addEventListener("click", () => {
 			if (this.#loader) this.#showLoader();
 
-			html2canvas(this.#documentEl, { scale: 6 }).then((canvas) => {
+			html2canvas(this.#fantomDocument, { scale: 6 }).then((canvas) => {
 				// Создаем ссылку для скачивания
 				const link = document.createElement("a");
 				link.href = canvas.toDataURL("image/png");

@@ -1,15 +1,10 @@
 .diploma {
-	display: flex;
-	justify-content: center;
-
-	&__background {
-		background-image: url("../../img/diplomas/diploma1.png");
-		background-repeat: no-repeat;
-		background-size: contain;
-		width: 500px;
-		min-width: 500px;
-		aspect-ratio: 39 / 55;
-	}
+	background-image: url("../../img/diplomas/diploma1.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	width: 500px;
+	min-width: 500px;
+	aspect-ratio: 39 / 55;
 
 	&__container {
 		position: relative;
@@ -45,6 +40,8 @@
 		top: 23%;
 		left: 0;
 		text-align: center;
+		width: 250px;
+		margin: 0 auto;
 	}
 
 	&__major {
@@ -58,18 +55,22 @@
 	}
 
 	&__footer {
-		position: relative;
-		top: 63%;
+		position: absolute;
+		bottom: 10%;
 		left: 0;
+		max-width: 100%;
+		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: end;
+		padding: 0 65px;
 	}
 
 	&__organization-fio {
 		font-family: "Tenor Sans", sans-serif;
 		color: #0f7379;
 		font-size: 16px;
+		width: 150px;
 	}
 
 	&__data {
@@ -80,10 +81,9 @@
 }
 
 .diploma-absolute {
+	position: absolute;
+	top: -10000px;
 	.diploma {
-		position: absolute;
-		top: -10000px;
-
 		&__background {
 			width: 500px;
 			min-width: 500px;
