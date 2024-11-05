@@ -175,7 +175,7 @@ class DiplomaGenerator {
 	#showErrorToast = () => {
 		if (document.querySelector(".toastify")) return;
 		Toastify({
-			text: "Заполните обязательные поля!",
+			text: "Заполните обязательные&nbsp;поля!",
 			duration: 3000,
 			gravity: "top", // `top` or `bottom`
 			position: "center", // `left`, `center` or `right`
@@ -184,7 +184,9 @@ class DiplomaGenerator {
 				cursor: "default",
 				background: "#a83232",
 				padding: "15px 40px",
+				textAlign: "center",
 			},
+			escapeMarkup: false,
 			offset: {
 				y: 10,
 			},

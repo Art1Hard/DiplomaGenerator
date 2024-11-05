@@ -1,13 +1,62 @@
+@media (max-width: 540px) {
+	.container {
+		.diploma {
+			width: 300px;
+
+			&__container {
+				padding: 30px 35px;
+			}
+
+			&__title {
+				font-size: 28px;
+				top: 12.5%;
+			}
+
+			&__award {
+				font-size: 16px;
+				top: 20%;
+			}
+
+			&__fio {
+				font-size: 14px;
+				top: 22%;
+				width: 165px;
+			}
+
+			&__major {
+				font-size: 16px;
+				top: 24%;
+				width: 180px;
+			}
+
+			&__footer {
+				padding: 0 42px;
+				bottom: 11%;
+			}
+
+			&__organization-fio {
+				font-size: 10px;
+				width: 122px;
+			}
+
+			&__data {
+				font-size: 10px;
+			}
+		}
+	}
+}
+
 .diploma {
 	background-image: url("../../img/diplomas/diploma1.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	width: 500px;
-	min-width: 500px;
 	aspect-ratio: 39 / 55;
 	flex: 50%;
 
 	&__container {
+		overflow-wrap: break-word; /* Для современных браузеров */
+		word-wrap: break-word; /* Для старых браузеров */
 		position: relative;
 		padding: 45px 65px;
 		height: 100%;
@@ -53,6 +102,8 @@
 		top: 25%;
 		left: 0;
 		text-align: center;
+		width: 265px;
+		margin: 0 auto;
 	}
 
 	&__footer {
@@ -71,7 +122,7 @@
 		font-family: "Tenor Sans", sans-serif;
 		color: #0f7379;
 		font-size: 16px;
-		width: 150px;
+		width: 210px;
 	}
 
 	&__data {
@@ -82,8 +133,10 @@
 }
 
 .diploma-absolute {
+	overflow: hidden;
 	position: absolute;
 	top: -10000px;
+	left: -10000px;
 	.diploma {
 		&__background {
 			width: 500px;

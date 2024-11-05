@@ -1,18 +1,23 @@
 <form class="diploma-form" id="diploma-form">
 	<input
+		minlength="5"
+		maxlength="50"
 		class="diploma-form__input"
 		type="text"
 		id="fio-input"
-		placeholder="Имя получателя *"
+		placeholder="ФИО получателя *"
 		required />
 
 	<input
+		maxlength="50"
 		class="diploma-form__input"
 		type="text"
 		id="major-input"
-		placeholder="Должность" />
+		placeholder="Специальность *"
+		required />
 
 	<input
+		maxlength="50"
 		class="diploma-form__input"
 		type="text"
 		id="organizator-input"
