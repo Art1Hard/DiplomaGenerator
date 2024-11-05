@@ -32,8 +32,12 @@ class DiplomaGenerator {
 					diplomaData[i][j].textContent = formData[i].value;
 
 					if (formData[i].id === "date-input") {
-						// Если это поле даты
-						diplomaData[i][j].textContent = this.#getLocalDate(formData[i]);
+						if (formData[i].value === "") {
+							diplomaData[i][j].textContent = "Дата";
+						} else {
+							// Если это поле даты
+							diplomaData[i][j].textContent = this.#getLocalDate(formData[i]);
+						}
 					}
 				}
 			});
@@ -50,7 +54,7 @@ class DiplomaGenerator {
 
 	downloadDocumentByPDF = (btn) => {
 		btn.addEventListener("click", () => {
-			if (this.#isEmptyFio()) {
+			if (this.#isEmptyRequiredInputs()) {
 				alert("Заполните ФИО");
 				return;
 			}
@@ -82,10 +86,13 @@ class DiplomaGenerator {
 
 	downloadDocumentByPNG = (btn) => {
 		btn.addEventListener("click", () => {
-			if (this.#isEmptyFio()) {
-				alert("Заполните ФИО");
+			if (this.#isEmptyRequiredInputs()) {
+				this.#setErrorInputs();
+				alert("Заполните обязательные поля!");
 				return;
 			}
+
+			this.#removeErrorInputs();
 
 			if (this.#loader) this.#showLoader();
 
@@ -103,8 +110,27 @@ class DiplomaGenerator {
 		});
 	};
 
-	#isEmptyFio = () => {
-		return this.#form.querySelector("#fio-input").value === "";
+	#setErrorInputs = () => {
+		const inputs = this.#form.querySelectorAll("input[required]");
+		inputs.forEach((input) => {
+			input.style.color = "red";
+		});
+	};
+
+	#removeErrorInputs = () => {
+		const inputs = this.#form.querySelectorAll("input[required]");
+		inputs.forEach((input) => {
+			input.style.color = "black";
+		});
+	};
+
+	#isEmptyRequiredInputs = () => {
+		const inputs = this.#form.querySelectorAll("input[required]");
+		for (let i = 0; i < inputs.length; i++) {
+			if (inputs[i].value === "") return true;
+		}
+
+		return false;
 	};
 
 	#showLoader = () => {

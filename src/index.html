@@ -60,15 +60,18 @@
 
 		<section class="diploma-generator">
 			<div class="container">
-				<h1 class="diploma-generator__title">Hello world!</h1>
+				<h1 class="diploma-generator__title">
+					Получите диплом за&nbsp;<span id="diploma-type"></span>
+				</h1>
 
 				<div class="diploma-generator__card">
 					@@include('html/elements/diploma.html',{})
-					@@include('html/elements/form.html',{})
+					<div class="diploma-generator__get">
+						@@include('html/elements/form.html',{})
+						<button id="download-pdf">Скачать диплом в pdf</button>
+						<button id="download-png">Скачать диплом в png</button>
+					</div>
 				</div>
-
-				<button id="download-pdf">Скачать диплом в pdf</button>
-				<button id="download-png">Скачать диплом в png</button>
 			</div>
 		</section>
 	</body>

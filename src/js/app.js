@@ -1,4 +1,5 @@
 import DiplomaGenerator from "./modules/DiplomaGenerator.js";
+import startType from "./modules/typeTitle.js";
 import { isWebp } from "./modules/webp.js";
 
 const diplomaEl = document.querySelectorAll(".diploma");
@@ -13,3 +14,5 @@ const diplomaG = new DiplomaGenerator(diplomaEl[1], diplomaEl[0], form, loader);
 diplomaG.downloadDocumentByPDF(downloadPDFBtn);
 diplomaG.downloadDocumentByPNG(downloadPNGBtn);
 diplomaG.initDiplomaGenerator();
+
+startType();
