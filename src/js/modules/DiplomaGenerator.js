@@ -1,17 +1,20 @@
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import Toastify from "toastify-js";
+
+import "toastify-js/src/toastify.css";
 
 class DiplomaGenerator {
-	#documentEl;
 	#fantomDocument;
-	#loader;
 	#form;
+	#loader;
+	#bodyClassLocked;
 
-	constructor(documentEl, fantomDocument, form, loader) {
-		this.#documentEl = documentEl;
+	constructor(fantomDocument, form, { loader, bodyClassLocked = "locked" }) {
 		this.#fantomDocument = fantomDocument;
 		this.#form = form;
 		this.#loader = loader;
+		this.#bodyClassLocked = bodyClassLocked;
 	}
 
 	initDiplomaGenerator = () => {
@@ -27,6 +30,8 @@ class DiplomaGenerator {
 		const diplomaData = [fioEl, majorEl, organizatorEl, dateEl];
 
 		for (let i = 0; i < formData.length; i++) {
+			this.#resetInputValue(formData[i]);
+
 			formData[i].addEventListener("input", () => {
 				for (let j = 0; j < diplomaData[i].length; j++) {
 					diplomaData[i][j].textContent = formData[i].value;
@@ -44,6 +49,10 @@ class DiplomaGenerator {
 		}
 	};
 
+	#resetInputValue = (input) => {
+		input.value = "";
+	};
+
 	#getLocalDate = (input) => {
 		return new Date(input.value).toLocaleDateString("ru-RU", {
 			day: "2-digit",
@@ -54,12 +63,14 @@ class DiplomaGenerator {
 
 	downloadDocumentByPDF = (btn) => {
 		btn.addEventListener("click", () => {
-			if (this.#isEmptyRequiredInputs()) {
-				alert("Заполните ФИО");
+			if (!this.#validateInputs()) {
+				this.#showErrorToast();
 				return;
 			}
 
-			if (this.#loader) this.#showLoader();
+			if (this.#loader) {
+				this.#showLoader();
+			}
 
 			html2canvas(this.#fantomDocument, { scale: 6, useCORS: true }).then(
 				(canvas) => {
@@ -78,7 +89,9 @@ class DiplomaGenerator {
 					// Сохраняем PDF
 					pdf.save("diploma.pdf");
 
-					if (this.#loader) this.#hideLoader();
+					if (this.#loader) {
+						this.#hideLoader();
+					}
 				}
 			);
 		});
@@ -86,15 +99,14 @@ class DiplomaGenerator {
 
 	downloadDocumentByPNG = (btn) => {
 		btn.addEventListener("click", () => {
-			if (this.#isEmptyRequiredInputs()) {
-				this.#setErrorInputs();
-				alert("Заполните обязательные поля!");
+			if (!this.#validateInputs()) {
+				this.#showErrorToast();
 				return;
 			}
 
-			this.#removeErrorInputs();
-
-			if (this.#loader) this.#showLoader();
+			if (this.#loader) {
+				this.#showLoader();
+			}
 
 			html2canvas(this.#fantomDocument, { scale: 6 }).then((canvas) => {
 				// Создаем ссылку для скачивания
@@ -105,40 +117,78 @@ class DiplomaGenerator {
 				// Автоматически кликаем на ссылку для скачивания изображения
 				link.click();
 
-				if (this.#loader) this.#hideLoader();
+				if (this.#loader) {
+					this.#hideLoader();
+				}
 			});
 		});
 	};
 
-	#setErrorInputs = () => {
+	#validateInputs = () => {
 		const inputs = this.#form.querySelectorAll("input[required]");
+		let isValidate = true;
+
 		inputs.forEach((input) => {
-			input.style.color = "red";
+			this.#removeErrorInput(input);
+
+			if (this.#isEmptyRequierdInput(input)) {
+				this.#addErrorInput(input);
+				isValidate = false;
+			}
 		});
+
+		return isValidate;
 	};
 
-	#removeErrorInputs = () => {
-		const inputs = this.#form.querySelectorAll("input[required]");
-		inputs.forEach((input) => {
-			input.style.color = "black";
-		});
+	#addErrorInput = (input) => {
+		if (input.value === "") input.classList.add("diploma-form__input--error");
 	};
 
-	#isEmptyRequiredInputs = () => {
-		const inputs = this.#form.querySelectorAll("input[required]");
-		for (let i = 0; i < inputs.length; i++) {
-			if (inputs[i].value === "") return true;
-		}
+	#removeErrorInput = (input) => {
+		if (input.value !== "")
+			input.classList.remove("diploma-form__input--error");
+	};
 
+	#isEmptyRequierdInput = (input) => {
+		if (input.value === "") return true;
 		return false;
 	};
 
+	#lockBody = () => {
+		document.body.classList.add(this.#bodyClassLocked);
+	};
+
+	#unlockBody = () => {
+		document.body.classList.remove(this.#bodyClassLocked);
+	};
+
 	#showLoader = () => {
+		this.#lockBody();
 		this.#loader.classList.add("loading--active");
 	};
 
 	#hideLoader = () => {
+		this.#unlockBody();
 		this.#loader.classList.remove("loading--active");
+	};
+
+	#showErrorToast = () => {
+		if (document.querySelector(".toastify")) return;
+		Toastify({
+			text: "Заполните обязательные поля!",
+			duration: 3000,
+			gravity: "top", // `top` or `bottom`
+			position: "center", // `left`, `center` or `right`
+			stopOnFocus: true, // Prevents dismissing of toast on hover
+			style: {
+				cursor: "default",
+				background: "#a83232",
+				padding: "15px 40px",
+			},
+			offset: {
+				y: 10,
+			},
+		}).showToast();
 	};
 }
 

@@ -1,15 +1,27 @@
+@use "../vars/colors";
+
 .diploma-form {
 	display: flex;
 	flex-direction: column;
-	&__name {
-	}
+	gap: 20px;
 
-	&__major {
-	}
+	&__input {
+		padding: 20px;
+		border: 1px solid colors.$text;
+		border-radius: 12px;
+		font-size: 16px;
+		font-weight: 500;
 
-	&__organizator {
-	}
+		&::placeholder {
+			color: rgba(colors.$text, 0.7);
+		}
 
-	&__date {
+		&:focus {
+			border-width: 2px;
+		}
+
+		&--error {
+			border-color: red;
+		}
 	}
 }

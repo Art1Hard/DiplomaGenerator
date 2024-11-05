@@ -58,6 +58,15 @@
 			</svg>
 		</div>
 
+		<div class="required-popup">
+			<div class="required-popup__content">
+				<div class="required-popup__container-close">
+					<div class="required-popup__close"></div>
+				</div>
+				<h4 class="required-popup__title">Заполните обязательные поля!</h4>
+			</div>
+		</div>
+
 		<section class="diploma-generator">
 			<div class="container">
 				<h1 class="diploma-generator__title">
@@ -66,10 +75,25 @@
 
 				<div class="diploma-generator__card">
 					@@include('html/elements/diploma.html',{})
-					<div class="diploma-generator__get">
+					<div class="diploma-generator__generate">
 						@@include('html/elements/form.html',{})
-						<button id="download-pdf">Скачать диплом в pdf</button>
-						<button id="download-png">Скачать диплом в png</button>
+
+						<div class="diploma-generator__footer">
+							<h4 class="diploma-generator__footer-title">Скачать диплом</h4>
+
+							<div class="diploma-generator__download-btns">
+								<button
+									class="diploma-generator__download-btn"
+									id="download-pdf">
+									Скачать PDF
+								</button>
+								<button
+									class="diploma-generator__download-btn"
+									id="download-png">
+									Скачать PNG
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,66 @@
+@use "../vars/colors.scss";
+
+.required-popup {
+	cursor: pointer;
+	position: fixed;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(#000000, 0.8);
+
+	&__content {
+		cursor: default;
+		position: relative;
+		background-color: colors.$secondly;
+		padding: 50px 100px;
+		border-radius: 15px;
+	}
+
+	&__container-close {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		z-index: 10;
+	}
+
+	&__close {
+		cursor: pointer;
+		position: relative;
+		width: 28px; // Задаем ширину и высоту для крестика
+		height: 28px;
+
+		&:before,
+		&:after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 100%;
+			height: 2px; // Толщина линий крестика
+			background-color: colors.$text; // Цвет линий
+			transform-origin: center;
+		}
+
+		&:before {
+			transform: translate(-50%, -50%) rotate(45deg);
+		}
+
+		&:after {
+			transform: translate(-50%, -50%) rotate(-45deg);
+		}
+	}
+
+	&__title {
+		font-weight: 500;
+		font-size: 22px;
+	}
+
+	&.required-popup--show {
+		display: flex;
+	}
+}
