@@ -3,21 +3,51 @@ import html2canvas from "html2canvas";
 import Toastify from "toastify-js";
 
 import "toastify-js/src/toastify.css";
+import Form from "./Form.js";
 
 class DiplomaGenerator {
-	#fantomDocument;
+	#documentElement;
 	#form;
 	#loader;
 	#bodyClassLocked;
 
-	constructor(fantomDocument, form, { loader, bodyClassLocked = "locked" }) {
-		this.#fantomDocument = fantomDocument;
-		this.#form = form;
+	constructor(
+		documentSelector,
+		form,
+		{ loader, bodyClassLocked = "locked", inputErrorClass }
+	) {
+		this.#documentElement = document.querySelector(documentSelector);
+		this.#form = new Form(form, { errorClass: inputErrorClass });
 		this.#loader = loader;
 		this.#bodyClassLocked = bodyClassLocked;
 	}
 
 	initDiplomaGenerator = () => {
+		const inputs = this.#form.getInputs();
+
+		const diplomaData = this.#getDiplomaFillingElements();
+
+		inputs.forEach((input, index) => {
+			this.#resetInputValue(input);
+
+			input.addEventListener("input", () => {
+				diplomaData[index].forEach((diplomaText) => {
+					diplomaText.textContent = input.value;
+
+					if (input.id !== "date-input") return;
+
+					if (this.#form.isEmptyInput(input)) {
+						diplomaText.textContent = "Дата";
+						return;
+					}
+
+					diplomaText.textContent = this.#form.getLocalDate(input);
+				});
+			});
+		});
+	};
+
+	#getDiplomaFillingElements = () => {
 		const fioEl = document.querySelectorAll(".diploma__fio");
 		const majorEl = document.querySelectorAll(".diploma__major");
 		const organizatorEl = document.querySelectorAll(
@@ -25,45 +55,23 @@ class DiplomaGenerator {
 		);
 		const dateEl = document.querySelectorAll(".diploma__data");
 
-		const formData = this.#form.querySelectorAll("input");
-
-		const diplomaData = [fioEl, majorEl, organizatorEl, dateEl];
-
-		for (let i = 0; i < formData.length; i++) {
-			this.#resetInputValue(formData[i]);
-
-			formData[i].addEventListener("input", () => {
-				for (let j = 0; j < diplomaData[i].length; j++) {
-					diplomaData[i][j].textContent = formData[i].value;
-
-					if (formData[i].id === "date-input") {
-						if (formData[i].value === "") {
-							diplomaData[i][j].textContent = "Дата";
-						} else {
-							// Если это поле даты
-							diplomaData[i][j].textContent = this.#getLocalDate(formData[i]);
-						}
-					}
-				}
-			});
-		}
+		return [fioEl, majorEl, organizatorEl, dateEl];
 	};
 
 	#resetInputValue = (input) => {
 		input.value = "";
 	};
 
-	#getLocalDate = (input) => {
-		return new Date(input.value).toLocaleDateString("ru-RU", {
-			day: "2-digit",
-			month: "long",
-			year: "numeric",
-		});
-	};
+	downloadDocument = (btnSelector, isPDF = false) => {
+		const btn = document.querySelector(btnSelector);
 
-	downloadDocumentByPDF = (btn) => {
+		if (!btn) {
+			console.error(`downloadButton with ${btnSelector} selector is undefined`);
+			return;
+		}
+
 		btn.addEventListener("click", () => {
-			if (!this.#validateInputs()) {
+			if (!this.#form.validateInputs()) {
 				this.#showErrorToast();
 				return;
 			}
@@ -72,22 +80,35 @@ class DiplomaGenerator {
 				this.#showLoader();
 			}
 
-			html2canvas(this.#fantomDocument, { scale: 6, useCORS: true }).then(
+			html2canvas(this.#documentElement, { scale: 6, useCORS: true }).then(
 				(canvas) => {
-					const imgData = canvas.toDataURL("image/png");
+					if (isPDF) {
+						const imgData = canvas.toDataURL("image/png");
 
-					// Создаем PDF
-					const pdf = new jsPDF("p", "pt", "a4");
+						// Создаем PDF
+						const pdf = new jsPDF("p", "pt", "a4");
 
-					// Вычисляем размер изображения для подгонки под страницу PDF
-					const pdfWidth = pdf.internal.pageSize.getWidth();
-					const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+						// Вычисляем размер изображения для подгонки под страницу PDF
+						const pdfWidth = pdf.internal.pageSize.getWidth();
+						const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-					// Добавляем изображение на страницу PDF
-					pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+						// Добавляем изображение на страницу PDF
+						pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
 
-					// Сохраняем PDF
-					pdf.save("diploma.pdf");
+						// Сохраняем PDF
+						pdf.save("diploma.pdf");
+
+						if (this.#loader) this.#hideLoader();
+
+						return;
+					}
+
+					const link = document.createElement("a");
+					link.href = canvas.toDataURL("image/png");
+					link.download = "diploma.png";
+
+					// Автоматически кликаем на ссылку для скачивания изображения
+					link.click();
 
 					if (this.#loader) {
 						this.#hideLoader();
@@ -95,63 +116,6 @@ class DiplomaGenerator {
 				}
 			);
 		});
-	};
-
-	downloadDocumentByPNG = (btn) => {
-		btn.addEventListener("click", () => {
-			if (!this.#validateInputs()) {
-				this.#showErrorToast();
-				return;
-			}
-
-			if (this.#loader) {
-				this.#showLoader();
-			}
-
-			html2canvas(this.#fantomDocument, { scale: 6 }).then((canvas) => {
-				// Создаем ссылку для скачивания
-				const link = document.createElement("a");
-				link.href = canvas.toDataURL("image/png");
-				link.download = "diploma.png";
-
-				// Автоматически кликаем на ссылку для скачивания изображения
-				link.click();
-
-				if (this.#loader) {
-					this.#hideLoader();
-				}
-			});
-		});
-	};
-
-	#validateInputs = () => {
-		const inputs = this.#form.querySelectorAll("input[required]");
-		let isValidate = true;
-
-		inputs.forEach((input) => {
-			this.#removeErrorInput(input);
-
-			if (this.#isEmptyRequierdInput(input)) {
-				this.#addErrorInput(input);
-				isValidate = false;
-			}
-		});
-
-		return isValidate;
-	};
-
-	#addErrorInput = (input) => {
-		if (input.value === "") input.classList.add("diploma-form__input--error");
-	};
-
-	#removeErrorInput = (input) => {
-		if (input.value !== "")
-			input.classList.remove("diploma-form__input--error");
-	};
-
-	#isEmptyRequierdInput = (input) => {
-		if (input.value === "") return true;
-		return false;
 	};
 
 	#lockBody = () => {

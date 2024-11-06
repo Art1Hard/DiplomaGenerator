@@ -2,6 +2,7 @@
 	.container {
 		.diploma {
 			width: 300px;
+			min-width: 300px;
 
 			&__container {
 				padding: 30px 35px;
@@ -51,10 +52,13 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	width: 500px;
+	min-width: 500px;
 	aspect-ratio: 39 / 55;
 	flex: 50%;
 
 	&__container {
+		font-family: "Tenor Sans", sans-serif;
+		color: #0f7379;
 		overflow-wrap: break-word; /* Для современных браузеров */
 		word-wrap: break-word; /* Для старых браузеров */
 		position: relative;
@@ -63,8 +67,6 @@
 	}
 
 	&__title {
-		font-family: "Tenor Sans", sans-serif;
-		color: #0f7379;
 		font-size: 42px;
 		position: relative;
 		top: 13.5%;
@@ -73,8 +75,6 @@
 	}
 
 	&__award {
-		font-family: "Tenor Sans", sans-serif;
-		color: #0f7379;
 		font-size: 26px;
 		position: relative;
 		top: 21%;
@@ -83,8 +83,6 @@
 	}
 
 	&__fio {
-		font-family: "Tenor Sans", sans-serif;
-		color: #0f7379;
 		font-size: 22px;
 		position: relative;
 		top: 23%;
@@ -95,8 +93,6 @@
 	}
 
 	&__major {
-		font-family: "Tenor Sans", sans-serif;
-		color: #0f7379;
 		font-size: 26px;
 		position: relative;
 		top: 25%;
@@ -119,15 +115,11 @@
 	}
 
 	&__organization-fio {
-		font-family: "Tenor Sans", sans-serif;
-		color: #0f7379;
 		font-size: 16px;
 		width: 210px;
 	}
 
 	&__data {
-		font-family: "Tenor Sans", sans-serif;
-		color: #0f7379;
 		font-size: 16px;
 	}
 }
