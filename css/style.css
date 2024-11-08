@@ -214,6 +214,7 @@ body.locked {
   background-size: contain;
   width: 500px;
   min-width: 500px;
+  max-width: 500px;
   aspect-ratio: 39/55;
   -webkit-box-flex: 50%;
       -ms-flex: 50%;
