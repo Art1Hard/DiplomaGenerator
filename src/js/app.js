@@ -1,6 +1,6 @@
 import DiplomaGenerator from "./modules/DiplomaGenerator.js";
 import startType from "./modules/typeTitle.js";
-import { isWebp } from "./modules/webp.js";
+import isWebp from "./modules/webp.js";
 
 const loader = document.querySelector(".loading");
 
