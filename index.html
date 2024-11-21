@@ -6,9 +6,9 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link
-		href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Tenor+Sans&display=swap&_v=20241108144142"
+		href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Tenor+Sans&display=swap&_v=20241121184557"
 		rel="stylesheet" />
-	<link rel="stylesheet" href="css/style.min.css?_v=20241108144142" />
+	<link rel="stylesheet" href="css/style.min.css?_v=20241121184557" />
 	<title>Генератор дипломов</title>
 </head>
 
@@ -18,12 +18,9 @@
 			<div class="diploma">
 	<div class="diploma__container">
 		<h2 class="diploma__title">Диплом</h2>
-		<h3 class="diploma__award">Подтверждает, что</h3>
-		<h4 class="diploma__fio">
-			Фамилия <br />
-			Имя Отчество
-		</h4>
-		<h3 class="diploma__major">Специальность</h3>
+		<h4 class="diploma__award">Награждается</h4>
+		<h3 class="diploma__fio">Фамилия Имя Отчество</h3>
+		<h4 class="diploma__major">Населённый пункт</h4>
 		<div class="diploma__footer">
 			<p class="diploma__organization-fio"></p>
 			<p class="diploma__data">Дата</p>
@@ -46,7 +43,7 @@
 				stroke-linecap="round"
 				fill="none"
 				stroke-dasharray="50.26548245743669 50.26548245743669"
-				stroke="#169aa1"
+				stroke="#485bff"
 				stroke-width="8"
 				r="32"
 				cy="50"
@@ -96,25 +93,48 @@
 		<section class="diploma-generator">
 			<div class="container">
 				<h1 class="diploma-generator__title">
-					Получите диплом за&nbsp;<span id="diploma-type"></span>
+					Получите диплом за&nbsp;30&nbsp;секунд!
 				</h1>
 
 				<div class="diploma-generator__row">
-					<div class="diploma">
+					<div class="diploma-generator__diploma-choise">
+						<!-- Slider main container -->
+<div class="slider swiper">
+	<!-- Additional required wrapper -->
+	<div class="slider__wrapper swiper-wrapper">
+		<!-- Slides -->
+		<div class="slider__slide swiper-slide">
+			<picture><source srcset="img/diplomas/diploma2.webp" type="image/webp"><img src="img/diplomas/diploma2.png" alt="" /></picture>
+		</div>
+		<div class="slider__slide swiper-slide">
+			<picture><source srcset="img/diplomas/diploma3.webp" type="image/webp"><img src="img/diplomas/diploma3.png" alt="" /></picture>
+		</div>
+		<div class="slider__slide swiper-slide">
+			<picture><source srcset="img/diplomas/diploma4.webp" type="image/webp"><img src="img/diplomas/diploma4.png" alt="" /></picture>
+		</div>
+		<div class="slider__slide swiper-slide">
+			<picture><source srcset="img/diplomas/diploma5.webp" type="image/webp"><img src="img/diplomas/diploma5.png" alt="" /></picture>
+		</div>
+		<div class="slider__slide swiper-slide">
+			<picture><source srcset="img/diplomas/diploma1.webp" type="image/webp"><img src="img/diplomas/diploma1.png" alt="" /></picture>
+		</div>
+	</div>
+</div>
+
+						<div class="diploma">
 	<div class="diploma__container">
 		<h2 class="diploma__title">Диплом</h2>
-		<h3 class="diploma__award">Подтверждает, что</h3>
-		<h4 class="diploma__fio">
-			Фамилия <br />
-			Имя Отчество
-		</h4>
-		<h3 class="diploma__major">Специальность</h3>
+		<h4 class="diploma__award">Награждается</h4>
+		<h3 class="diploma__fio">Фамилия Имя Отчество</h3>
+		<h4 class="diploma__major">Населённый пункт</h4>
 		<div class="diploma__footer">
 			<p class="diploma__organization-fio"></p>
 			<p class="diploma__data">Дата</p>
 		</div>
 	</div>
 </div>
+
+					</div>
 
 					<div class="diploma-generator__generate">
 						<form class="diploma-form" id="diploma-form">
@@ -124,7 +144,7 @@
 		class="diploma-form__input"
 		type="text"
 		id="fio-input"
-		placeholder="ФИО получателя *"
+		placeholder="ФИО участника *"
 		required />
 
 	<input
@@ -132,8 +152,7 @@
 		class="diploma-form__input"
 		type="text"
 		id="major-input"
-		placeholder="Специальность *"
-		required />
+		placeholder="Населённый пункт" />
 
 	<input
 		maxlength="50"
@@ -142,23 +161,54 @@
 		id="organizator-input"
 		placeholder="Имя выдающего" />
 
-	<input class="diploma-form__input" type="date" id="date-input" required />
+	<label for="date-input" class="diploma-form__label"
+		>Дата участия в творческом конкурсе:</label
+	>
+	<input
+		name="date-input"
+		class="diploma-form__input"
+		type="date"
+		id="date-input"
+		required />
+
+	<input
+		minlength="5"
+		maxlength="50"
+		class="diploma-form__input"
+		type="text"
+		id="organization-input"
+		placeholder="Название учреждения" />
+
+	<select
+		name="position-select"
+		class="diploma-form__input"
+		id="position-select">
+		<option selected value="1 место">1 место</option>
+		<option value="2 место">2 место</option>
+		<option value="3 место">3 место</option>
+		<option value="Участник">Участник</option>
+	</select>
+
+	<label for="type-select" class="diploma-form__label">Тип конкурса:</label>
+	<select name="type-select" class="diploma-form__input" id="type-select">
+		<option selected value="Международный">Международный</option>
+		<option value="Всероссийский">Всероссийский</option>
+		<option value="Межрегиональный">Межрегиональный</option>
+	</select>
 </form>
 
 
 						<div class="diploma-generator__footer">
-							<h4 class="diploma-generator__footer-title">Скачать диплом</h4>
-
 							<div class="diploma-generator__download-btns">
-								<button
+								<!-- <button
 									class="diploma-generator__download-btn"
 									id="download-pdf">
 									Скачать PDF
-								</button>
+								</button> -->
 								<button
 									class="diploma-generator__download-btn"
 									id="download-png">
-									Скачать PNG
+									Получить диплом
 								</button>
 							</div>
 						</div>
@@ -168,5 +218,5 @@
 		</section>
 	</body>
 
-	<script src="js/app.min.js?_v=20241108144142"></script>
+	<script src="js/app.min.js?_v=20241121184557"></script>
 </html>
