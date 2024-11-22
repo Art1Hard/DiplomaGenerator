@@ -161,6 +161,7 @@ body.locked {
   -webkit-column-gap: 15px;
      -moz-column-gap: 15px;
           column-gap: 15px;
+  row-gap: 40px;
 }
 
 .diploma-generator__generate {
@@ -245,38 +246,96 @@ body.locked {
 .diploma__title {
   font-size: 52px;
   font-weight: 700;
-  position: relative;
-  top: 10%;
-  left: 0;
+  padding-top: 60px;
+  margin-bottom: 60px;
   text-align: center;
 }
 
 .diploma__award {
   font-size: 16px;
-  position: relative;
-  top: 21%;
-  left: 0;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 .diploma__fio {
   font-size: 20px;
   font-weight: 600;
-  position: relative;
-  top: 22%;
-  left: 0;
+  text-align: center;
+  width: 350px;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+.diploma__organization {
+  font-size: 14px;
+  width: 350px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+.diploma__city {
+  font-size: 14px;
+  text-align: center;
+  width: 350px;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+.diploma__preparing {
+  display: none;
+  font-size: 14px;
   text-align: center;
   width: 350px;
   margin: 0 auto;
 }
 
-.diploma__major {
-  font-size: 16px;
-  position: relative;
-  top: 24%;
-  left: 0;
+.diploma__supervisor-member {
+  display: none;
+  font-size: 20px;
+  font-weight: 600;
   text-align: center;
   width: 350px;
+  margin: 0 auto;
+}
+
+.diploma__supervisor {
+  font-size: 14px;
+  width: 350px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.diploma__position {
+  font-size: 22px;
+  font-weight: 700;
+  width: 350px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.diploma__type {
+  font-size: 16px;
+  width: 350px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.diploma__nomination {
+  font-size: 16px;
+  width: 350px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+
+.diploma__work-name {
+  font-size: 16px;
+  width: 350px;
+  text-align: center;
   margin: 0 auto;
 }
 
@@ -319,6 +378,18 @@ body.locked {
   min-width: 500px;
 }
 
+.diploma.toggle-supervisor .diploma__preparing {
+  display: block;
+}
+
+.diploma.toggle-supervisor .diploma__supervisor-member {
+  display: block;
+}
+
+.diploma.toggle-supervisor .diploma__supervisor {
+  display: none;
+}
+
 .loading {
   background-color: rgba(0, 0, 0, 0.8);
   display: none;
@@ -356,13 +427,13 @@ body.locked {
       -ms-flex-direction: column;
           flex-direction: column;
   height: 100%;
-  gap: 20px;
+  gap: 15px;
 }
 
 .diploma-form__input {
-  padding: 20px;
+  padding: 10px 20px;
   border: 2px solid rgba(72, 91, 255, 0.6);
-  border-radius: 7px;
+  border-radius: 20px;
   font-size: 16px;
   font-weight: 500;
   width: 100%;
@@ -400,10 +471,85 @@ body.locked {
   border-color: red;
 }
 
+.diploma-form__toggle-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
 .diploma-form__label {
-  padding-top: 20px;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
+}
+
+.diploma-form__toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.diploma-form__toggle-switch input {
+  display: none;
+}
+
+.diploma-form__toggle-switch input:checked + .diploma-form__slider {
+  background-color: #485bff;
+}
+
+.diploma-form__toggle-switch input:checked + .diploma-form__slider::before {
+  -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+          transform: translateX(26px);
+}
+
+.diploma-form__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #485bff;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+  border-radius: 34px;
+}
+
+.diploma-form__slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #ffffff;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+  border-radius: 50%;
+}
+
+.diploma-form #supervisor-member-input {
+  display: none;
+}
+
+.diploma-form.toggle-supervisor #supervisor-input {
+  display: none;
+}
+
+.diploma-form.toggle-supervisor #supervisor-member-input {
+  display: block;
 }
 
 .required-popup {
@@ -486,7 +632,6 @@ body.locked {
 .slider {
   max-height: 705px;
   max-width: 860px;
-  margin-bottom: 60px;
 }
 
 .slider__wrapper {
@@ -607,7 +752,7 @@ body.locked {
     width: 165px;
   }
 
-  .container .diploma__major {
+  .container .diploma__city {
     font-size: 16px;
     top: 24%;
     width: 180px;

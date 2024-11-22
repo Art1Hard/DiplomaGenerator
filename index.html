@@ -6,9 +6,9 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link
-		href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Tenor+Sans&display=swap&_v=20241121191357"
+		href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Tenor+Sans&display=swap&_v=20241122180023"
 		rel="stylesheet" />
-	<link rel="stylesheet" href="css/style.min.css?_v=20241121191357" />
+	<link rel="stylesheet" href="css/style.min.css?_v=20241122180023" />
 	<title>Генератор дипломов</title>
 </head>
 
@@ -20,7 +20,15 @@
 		<h2 class="diploma__title">Диплом</h2>
 		<h4 class="diploma__award">Награждается</h4>
 		<h3 class="diploma__fio">Фамилия Имя Отчество</h3>
-		<h4 class="diploma__major">Населённый пункт</h4>
+		<h4 class="diploma__organization">Название учреждения</h4>
+		<h4 class="diploma__city">Населённый пункт</h4>
+		<h4 class="diploma__preparing">за подготовку</h4>
+		<h4 class="diploma__supervisor-member">ФИО участника</h4>
+		<h4 class="diploma__position">Победитель (1 место)</h4>
+		<h4 class="diploma__type">Международного конкурса</h4>
+		<h4 class="diploma__nomination"></h4>
+		<h4 class="diploma__work-name">Работа:</h4>
+		<h4 class="diploma__supervisor"></h4>
 		<div class="diploma__footer">
 			<p class="diploma__organization-fio"></p>
 			<p class="diploma__data">Дата</p>
@@ -126,7 +134,15 @@
 		<h2 class="diploma__title">Диплом</h2>
 		<h4 class="diploma__award">Награждается</h4>
 		<h3 class="diploma__fio">Фамилия Имя Отчество</h3>
-		<h4 class="diploma__major">Населённый пункт</h4>
+		<h4 class="diploma__organization">Название учреждения</h4>
+		<h4 class="diploma__city">Населённый пункт</h4>
+		<h4 class="diploma__preparing">за подготовку</h4>
+		<h4 class="diploma__supervisor-member">ФИО участника</h4>
+		<h4 class="diploma__position">Победитель (1 место)</h4>
+		<h4 class="diploma__type">Международного конкурса</h4>
+		<h4 class="diploma__nomination"></h4>
+		<h4 class="diploma__work-name">Работа:</h4>
+		<h4 class="diploma__supervisor"></h4>
 		<div class="diploma__footer">
 			<p class="diploma__organization-fio"></p>
 			<p class="diploma__data">Дата</p>
@@ -138,6 +154,15 @@
 
 					<div class="diploma-generator__generate">
 						<form class="diploma-form" id="diploma-form">
+	<div class="diploma-form__toggle-container">
+		<p>Участнику</p>
+		<label class="diploma-form__toggle-switch">
+			<input type="checkbox" id="toggle" />
+			<span class="diploma-form__slider"></span>
+		</label>
+		<p>Руководителю</p>
+	</div>
+
 	<input
 		minlength="5"
 		maxlength="50"
@@ -148,36 +173,33 @@
 		required />
 
 	<input
-		maxlength="50"
-		class="diploma-form__input"
-		type="text"
-		id="major-input"
-		placeholder="Населённый пункт" />
-
-	<input
-		maxlength="50"
-		class="diploma-form__input"
-		type="text"
-		id="organizator-input"
-		placeholder="Имя выдающего" />
-
-	<label for="date-input" class="diploma-form__label"
-		>Дата участия в творческом конкурсе:</label
-	>
-	<input
-		name="date-input"
-		class="diploma-form__input"
-		type="date"
-		id="date-input"
-		required />
-
-	<input
 		minlength="5"
 		maxlength="50"
 		class="diploma-form__input"
 		type="text"
 		id="organization-input"
 		placeholder="Название учреждения" />
+
+	<input
+		maxlength="50"
+		class="diploma-form__input"
+		type="text"
+		id="city-input"
+		placeholder="Населённый пункт" />
+
+	<input
+		maxlength="50"
+		class="diploma-form__input"
+		type="text"
+		id="supervisor-input"
+		placeholder="Руководитель" />
+
+	<input
+		maxlength="50"
+		class="diploma-form__input"
+		type="text"
+		id="supervisor-member-input"
+		placeholder="ФИО участника" />
 
 	<select
 		name="position-select"
@@ -195,6 +217,34 @@
 		<option value="Всероссийский">Всероссийский</option>
 		<option value="Межрегиональный">Межрегиональный</option>
 	</select>
+
+	<label for="nomination-select" class="diploma-form__label">Номинация:</label>
+	<select
+		name="nomination-select"
+		class="diploma-form__input"
+		id="nomination-select">
+		<option value="" disabled selected hidden>Выберите номинацию</option>
+		<option value='"Авторская песня"'>"Авторская песня"</option>
+		<option value='"Актёрское мастерство"'>"Актёрское мастерство"</option>
+		<option value='"Безопасная среда"'>"Безопасная среда"</option>
+	</select>
+
+	<input
+		maxlength="50"
+		class="diploma-form__input"
+		type="text"
+		id="work-name-input"
+		placeholder="Название работы" />
+
+	<label for="date-input" class="diploma-form__label"
+		>Дата участия в творческом конкурсе:</label
+	>
+	<input
+		name="date-input"
+		class="diploma-form__input"
+		type="date"
+		id="date-input"
+		required />
 </form>
 
 
@@ -218,5 +268,5 @@
 		</section>
 	</body>
 
-	<script src="js/app.min.js?_v=20241121191357"></script>
+	<script src="js/app.min.js?_v=20241122180023"></script>
 </html>
