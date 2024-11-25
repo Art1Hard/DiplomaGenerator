@@ -8,7 +8,22 @@ class Form {
 	}
 
 	getInputs = () => {
-		return this.#formElement.querySelectorAll("input");
+		return [
+			this.#formElement.querySelector("#fio-input"),
+			this.#formElement.querySelector("#organization-input"),
+			this.#formElement.querySelector("#city-input"),
+			this.#formElement.querySelector("#supervisor-input"),
+			this.#formElement.querySelector("#supervisor-member-input"),
+			this.#formElement.querySelector("#position-select"),
+			this.#formElement.querySelector("#type-select"),
+			this.#formElement.querySelector("#nomination-select"),
+			this.#formElement.querySelector("#work-name-input"),
+			this.#formElement.querySelector("#date-input"),
+		];
+	};
+
+	getFormElement = () => {
+		return this.#formElement;
 	};
 
 	validateInputs = () => {

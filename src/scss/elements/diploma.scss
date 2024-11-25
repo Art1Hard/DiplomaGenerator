@@ -24,7 +24,7 @@
 				width: 165px;
 			}
 
-			&__major {
+			&__city {
 				font-size: 16px;
 				top: 24%;
 				width: 180px;
@@ -48,71 +48,131 @@
 }
 
 .diploma {
-	background-image: url("../img/diplomas/diploma1.png");
+	background-image: url("../img/diplomas/diploma2.png");
 	background-repeat: no-repeat;
 	background-size: contain;
 	width: 500px;
 	min-width: 500px;
 	max-width: 500px;
+	max-height: 705px;
 	aspect-ratio: 39 / 55;
 	flex: 50%;
 
 	&__container {
-		font-family: "Tenor Sans", sans-serif;
-		color: #0f7379;
+		color: white;
 		overflow-wrap: break-word; /* Для современных браузеров */
 		word-wrap: break-word; /* Для старых браузеров */
 		position: relative;
-		padding: 45px 65px;
+		padding: 45px 45px;
 		height: 100%;
 	}
 
 	&__title {
-		font-size: 42px;
-		position: relative;
-		top: 13.5%;
-		left: 0;
+		font-size: 52px;
+		font-weight: 700;
+		padding-top: 60px;
+		margin-bottom: 60px;
 		text-align: center;
 	}
 
 	&__award {
-		font-size: 26px;
-		position: relative;
-		top: 21%;
-		left: 0;
+		font-size: 16px;
 		text-align: center;
+		margin-bottom: 5px;
 	}
 
 	&__fio {
-		font-size: 22px;
-		position: relative;
-		top: 23%;
-		left: 0;
+		font-size: 20px;
+		font-weight: 600;
 		text-align: center;
-		width: 250px;
+		width: 350px;
+		margin: 0 auto;
+		margin-bottom: 5px;
+	}
+
+	&__organization {
+		font-size: 14px;
+		width: 350px;
+		text-align: center;
+		margin: 0 auto;
+		margin-bottom: 5px;
+	}
+
+	&__city {
+		font-size: 14px;
+		text-align: center;
+		width: 350px;
+		margin: 0 auto;
+		margin-bottom: 5px;
+	}
+
+	&__preparing {
+		display: none;
+		font-size: 14px;
+		text-align: center;
+		width: 350px;
 		margin: 0 auto;
 	}
 
-	&__major {
-		font-size: 26px;
-		position: relative;
-		top: 25%;
-		left: 0;
+	&__supervisor-member {
+		display: none;
+		font-size: 20px;
+		font-weight: 600;
 		text-align: center;
-		width: 265px;
+		width: 350px;
+		margin: 0 auto;
+	}
+
+	&__supervisor {
+		font-size: 14px;
+		width: 350px;
+		text-align: center;
+		margin: 0 auto;
+		margin-bottom: 10px;
+	}
+
+	&__position {
+		font-size: 22px;
+		font-weight: 700;
+		width: 350px;
+		text-align: center;
+		margin: 0 auto;
+		margin-bottom: 10px;
+	}
+
+	&__type {
+		font-size: 16px;
+		width: 350px;
+		text-align: center;
+		margin: 0 auto;
+		margin-bottom: 10px;
+	}
+
+	&__nomination {
+		font-size: 16px;
+		width: 350px;
+		text-align: center;
+		margin: 0 auto;
+		margin-bottom: 5px;
+	}
+
+	&__work-name {
+		font-size: 16px;
+		width: 350px;
+		text-align: center;
 		margin: 0 auto;
 	}
 
 	&__footer {
 		position: absolute;
-		bottom: 10%;
+		bottom: 6%;
 		left: 0;
 		max-width: 100%;
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: end;
-		padding: 0 65px;
+		padding: 0 45px;
 	}
 
 	&__organization-fio {
@@ -135,5 +195,19 @@
 			width: 500px;
 			min-width: 500px;
 		}
+	}
+}
+
+.diploma.toggle-supervisor {
+	.diploma__preparing {
+		display: block;
+	}
+
+	.diploma__supervisor-member {
+		display: block;
+	}
+
+	.diploma__supervisor {
+		display: none;
 	}
 }

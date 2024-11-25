@@ -1,0 +1,34 @@
+@use "../vars/colors";
+
+.slider {
+	max-height: 705px;
+	max-width: 860px;
+
+	&__wrapper {
+		user-select: none; /* Запрещает выделение текста */
+	}
+
+	&__slide {
+		opacity: 0.6;
+		cursor: pointer;
+
+		@media (max-width: 721px) {
+			display: flex !important;
+			align-items: center;
+			justify-content: center;
+		}
+
+		img {
+			max-width: 160px;
+
+			@media (max-width: 721px) {
+				max-width: 250px;
+			}
+		}
+
+		&.swiper-slide-active {
+			opacity: 1;
+			cursor: default;
+		}
+	}
+}

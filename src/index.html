@@ -21,27 +21,29 @@
 		<section class="diploma-generator">
 			<div class="container">
 				<h1 class="diploma-generator__title">
-					Получите диплом за&nbsp;<span id="diploma-type"></span>
+					Получите диплом за&nbsp;30&nbsp;секунд!
 				</h1>
 
 				<div class="diploma-generator__row">
-					@@include('html/elements/diploma.html',{})
+					<div class="diploma-generator__diploma-choise">
+						@@include('html/elements/slider.html',{})
+						@@include('html/elements/diploma.html',{})
+					</div>
+
 					<div class="diploma-generator__generate">
 						@@include('html/elements/form.html',{})
 
 						<div class="diploma-generator__footer">
-							<h4 class="diploma-generator__footer-title">Скачать диплом</h4>
-
 							<div class="diploma-generator__download-btns">
-								<button
+								<!-- <button
 									class="diploma-generator__download-btn"
 									id="download-pdf">
 									Скачать PDF
-								</button>
+								</button> -->
 								<button
 									class="diploma-generator__download-btn"
 									id="download-png">
-									Скачать PNG
+									Получить диплом
 								</button>
 							</div>
 						</div>

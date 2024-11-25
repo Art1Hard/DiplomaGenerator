@@ -1,27 +1,93 @@
 <form class="diploma-form" id="diploma-form">
+	<div class="diploma-form__toggle-container">
+		<p>Участнику</p>
+		<label class="diploma-form__toggle-switch">
+			<input type="checkbox" id="toggle" />
+			<span class="diploma-form__slider"></span>
+		</label>
+		<p>Руководителю</p>
+	</div>
+
 	<input
 		minlength="5"
 		maxlength="50"
 		class="diploma-form__input"
 		type="text"
 		id="fio-input"
-		placeholder="ФИО получателя *"
+		placeholder="ФИО участника *"
 		required />
+
+	<input
+		minlength="5"
+		maxlength="50"
+		class="diploma-form__input"
+		type="text"
+		id="organization-input"
+		placeholder="Название учреждения" />
 
 	<input
 		maxlength="50"
 		class="diploma-form__input"
 		type="text"
-		id="major-input"
-		placeholder="Специальность *"
-		required />
+		id="city-input"
+		placeholder="Населённый пункт" />
 
 	<input
 		maxlength="50"
 		class="diploma-form__input"
 		type="text"
-		id="organizator-input"
-		placeholder="Имя выдающего" />
+		id="supervisor-input"
+		placeholder="Руководитель" />
 
-	<input class="diploma-form__input" type="date" id="date-input" required />
+	<input
+		maxlength="50"
+		class="diploma-form__input"
+		type="text"
+		id="supervisor-member-input"
+		placeholder="ФИО участника" />
+
+	<select
+		name="position-select"
+		class="diploma-form__input"
+		id="position-select">
+		<option selected value="1 место">1 место</option>
+		<option value="2 место">2 место</option>
+		<option value="3 место">3 место</option>
+		<option value="Участник">Участник</option>
+	</select>
+
+	<label for="type-select" class="diploma-form__label">Тип конкурса:</label>
+	<select name="type-select" class="diploma-form__input" id="type-select">
+		<option selected value="Международный">Международный</option>
+		<option value="Всероссийский">Всероссийский</option>
+		<option value="Межрегиональный">Межрегиональный</option>
+	</select>
+
+	<label for="nomination-select" class="diploma-form__label">Номинация:</label>
+	<select
+		name="nomination-select"
+		class="diploma-form__input"
+		id="nomination-select">
+		<option value="" disabled selected hidden>Выберите номинацию</option>
+		<option value='"Авторская песня"'>"Авторская песня"</option>
+		<option value='"Актёрское мастерство"'>"Актёрское мастерство"</option>
+		<option value='"Безопасная среда"'>"Безопасная среда"</option>
+	</select>
+
+	<input
+		maxlength="50"
+		class="diploma-form__input"
+		type="text"
+		id="work-name-input"
+		placeholder="Название работы" />
+
+	<label for="date-input" class="diploma-form__label"
+		>Дата участия в творческом конкурсе:</label
+	>
+	<input
+		name="date-input"
+		class="diploma-form__input"
+		type="date"
+		id="date-input"
+		required />
 </form>

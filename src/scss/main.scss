@@ -15,19 +15,11 @@ body {
 	background-color: colors.$secondly;
 	max-width: 1200px;
 	margin: 0 auto;
-	border-radius: 2%;
-	box-shadow: 0 0 14px rgba(#000000, 0.2);
+	border-radius: 10px;
+	overflow: hidden;
 
 	@media (max-width: 1080px) {
 		border-radius: 0;
-	}
-
-	@media (max-width: 1080px) and (min-height: 775px) {
-		height: 100vh;
-	}
-
-	@media (max-width: 935px) and (min-height: 775px) {
-		height: 100%;
 	}
 
 	@media (max-width: 614px) {

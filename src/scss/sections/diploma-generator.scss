@@ -8,12 +8,12 @@
 	}
 
 	&__title {
-		font-size: 32px;
-		font-weight: 500;
+		font-size: 38px;
+		font-weight: 600;
 		text-align: center;
-		margin-bottom: 30px;
+		margin-bottom: 40px;
 
-		@media (max-width: 370px) {
+		@media (max-width: 540px) {
 			font-size: 26px;
 		}
 	}
@@ -21,15 +21,26 @@
 	&__row {
 		display: flex;
 		justify-content: space-between;
-		gap: 80px;
+		gap: 30px;
 
-		@media (max-width: 935px) {
+		@media (max-width: 1080px) {
 			flex-direction: column;
 			align-items: center;
 		}
 
 		@media (max-width: 540px) {
 			gap: 40px;
+		}
+	}
+
+	&__diploma-choise {
+		display: flex;
+		column-gap: 15px;
+		row-gap: 40px;
+
+		@media (max-width: 721px) {
+			flex-direction: column;
+			align-items: center;
 		}
 	}
 
@@ -57,10 +68,11 @@
 	}
 
 	&__download-btn {
-		background-color: #0f7379;
+		background-color: colors.$accent;
+		font-weight: 700;
 		color: colors.$secondly;
 		padding: 20px;
-		border-radius: 15px;
+		border-radius: 50px;
 		flex: 40%;
 		min-width: 150px;
 		transition: background-color ease-in-out 0.15s;
@@ -68,11 +80,9 @@
 		@media (max-width: 1024px) {
 			flex: 100%;
 		}
-
-		@media (hover: hover) and (pointer: fine) {
-			&:hover {
-				background-color: #169aa1;
-			}
-		}
+		// @media (hover: hover) and (pointer: fine) {
+		// 	&:hover {
+		// 	}
+		// }
 	}
 }
